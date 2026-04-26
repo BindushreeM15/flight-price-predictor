@@ -2,15 +2,20 @@ import streamlit as st
 import streamlit.components.v1 as components
 import pickle
 import pandas as pd
+import os
+import gdown
 
 st.set_page_config(page_title="SkyPrice", layout="wide", page_icon="✈")
 
-try:
-    model = pickle.load(open("flight_model.pkl", "rb"))
-    model_columns = pickle.load(open("model_columns.pkl", "rb"))
-except:
-    st.error("Model files not found.")
-    st.stop()
+MODEL_URL = "https://drive.google.com/uc?id=1__P4l3K1ms05OVpUVWIRyOhO7Zwxp3tZ"
+MODEL_PATH = "flight_model.pkl"
+
+# Download if not exists
+if not os.path.exists(MODEL_PATH):
+    gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
+
+model = pickle.load(open(MODEL_PATH, "rb"))
+model_columns = pickle.load(open("model_columns.pkl", "rb"))
 
 st.markdown("""
 <style>
