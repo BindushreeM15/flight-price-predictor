@@ -1,4 +1,5 @@
 streamlit
 pandas
-scikit-learn==1.7.0numpy
+scikit-learn==1.7.0
+numpy
 gdown
